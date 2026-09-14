@@ -1,0 +1,27 @@
+.toast {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 92px;
+  background: var(--color-accent-2-800);
+  color: var(--color-bg);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 13px 18px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  animation: slideUp 200ms ease;
+  z-index: 50;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

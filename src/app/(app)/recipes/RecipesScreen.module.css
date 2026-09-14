@@ -1,0 +1,133 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.h1 {
+  font-size: 27px;
+  margin-right: auto;
+}
+
+.filterRow {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  margin: 12px 0 14px;
+}
+
+.filterRow::-webkit-scrollbar {
+  display: none;
+}
+
+.pill {
+  flex: none;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  min-height: 36px;
+  border: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+  background: transparent;
+  color: var(--color-text);
+}
+
+.pillOn {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  flex: none;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 9px;
+  text-align: center;
+}
+
+.thumbPhoto {
+  background: var(--color-neutral-200);
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+}
+
+.thumbNoPhoto {
+  background: var(--color-accent-100);
+  color: var(--color-accent-800);
+}
+
+.mid {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 16px;
+}
+
+.meta {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  margin: 2px 0 5px;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.right {
+  flex: none;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  text-align: right;
+}
+
+.empty {
+  text-align: center;
+  padding: 30px 0;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  font-size: 14px;
+}
+
+.empty button {
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 14px;
+  padding: 0;
+}

@@ -1,0 +1,42 @@
+.wrap {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 52px var(--gutter) 24px;
+  text-align: center;
+}
+
+.mark {
+  width: 78px;
+  height: 78px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  display: grid;
+  place-items: center;
+  color: var(--color-bg);
+  font-family: var(--font-heading);
+  font-size: 32px;
+  flex: none;
+}
+
+.title {
+  font-size: 31px;
+  margin-top: 20px;
+}
+
+.sub {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  margin-top: 6px;
+  margin-bottom: 34px;
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 24px;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--color-text) 42%, transparent);
+  line-height: 1.5;
+}

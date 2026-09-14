@@ -1,0 +1,22 @@
+/* The phone-width canvas every screen renders inside. On a real phone this
+   just fills the viewport; on a wider browser it centers as a card, since
+   the design was never meant to stretch to desktop width (see README:
+   "No tablet or desktop layout is designed"). */
+.frame {
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+  height: 100dvh;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 560px) {
+  .frame {
+    box-shadow: var(--shadow-lg);
+    border-left: 1px solid var(--color-divider);
+    border-right: 1px solid var(--color-divider);
+  }
+}

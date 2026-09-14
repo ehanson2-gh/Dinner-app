@@ -1,0 +1,154 @@
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.back {
+  background: none;
+  border: none;
+  color: var(--color-accent-700);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.edit {
+  background: none;
+  border: none;
+  color: var(--color-accent-700);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.addTagChip {
+  cursor: pointer;
+  border: none;
+}
+
+.photoRail {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 20px;
+}
+
+.photoRail::-webkit-scrollbar {
+  display: none;
+}
+
+.photo {
+  width: 132px;
+  height: 150px;
+  border-radius: var(--radius-lg);
+  flex: none;
+  background: var(--color-neutral-200);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.photoCaption {
+  font-weight: 600;
+  font-size: 10px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  text-align: center;
+  padding: 0 8px;
+}
+
+.addPhoto {
+  width: 96px;
+  height: 150px;
+  border-radius: var(--radius-lg);
+  flex: none;
+  border: 1.5px dashed color-mix(in srgb, var(--color-text) 28%, transparent);
+  background: none;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  cursor: pointer;
+}
+
+.kicker {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  margin: 0 0 8px;
+}
+
+.sourceRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.favicon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  flex: none;
+  background: var(--color-neutral-300);
+}
+
+.sourceMid {
+  min-width: 0;
+  flex: 1;
+}
+
+.sourceTitle {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.sourceDetail {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.addLinkForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.history {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--color-text) 62%, transparent);
+  line-height: 1.6;
+}

@@ -1,0 +1,150 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - 190px);
+}
+
+.sub {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  margin-bottom: 12px;
+}
+
+.sub button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-accent);
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.matches {
+  margin-top: 8px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.matchRow {
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 11px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.matchRow:hover {
+  background: var(--color-accent-100);
+}
+
+.kicker {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  margin: 16px 0 8px;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.nonMealRow {
+  display: flex;
+  gap: 7px;
+}
+
+.nonMealRow > button {
+  flex: 1;
+}
+
+.chip {
+  flex: none;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  color: var(--color-text);
+}
+
+.chipOn {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.extras {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.moreToggle {
+  justify-content: flex-start;
+  padding: 0;
+  min-height: 30px;
+  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  text-align: left;
+}
+
+.moreBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tagEditRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.tagInput {
+  border: none;
+  background: none;
+  font-size: 11px;
+  color: var(--color-text);
+  padding: 3px 4px;
+  min-width: 70px;
+  outline: none;
+}
+
+.attachRow {
+  display: flex;
+  gap: 8px;
+}
+
+.attachRow > button {
+  flex: 1;
+}
+
+.submitWrap {
+  margin-top: auto;
+  padding: 16px 0 14px;
+}

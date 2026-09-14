@@ -1,0 +1,64 @@
+.kicker {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+}
+
+.subKicker {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pill {
+  flex: none;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  min-height: 36px;
+  border: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+  background: transparent;
+  color: var(--color-text);
+}
+
+.pillOn {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.tagInputRow {
+  display: flex;
+  gap: 8px;
+}
+
+.tagInputRow > input {
+  flex: 1;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.attachRow {
+  display: flex;
+  gap: 8px;
+}
+
+.error {
+  font-size: 12px;
+  color: var(--color-accent-700);
+  margin: 0;
+}

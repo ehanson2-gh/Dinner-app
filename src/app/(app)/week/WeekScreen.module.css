@@ -1,0 +1,197 @@
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.h1 {
+  font-size: 27px;
+}
+
+.range {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+
+.strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 9px 0 8px;
+  min-height: 58px;
+  border-radius: 16px;
+  cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.tileOn {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.tileLetter {
+  font-weight: 700;
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+.tileNum {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.tilePip {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+}
+
+.pane {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 17.6px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-bottom: 18px;
+}
+
+.paneKickerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.paneKicker {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-accent-700);
+}
+
+.mealName {
+  font-size: 25px;
+}
+
+.tagRow {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.note {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--color-text) 62%, transparent);
+  line-height: 1.45;
+}
+
+.actionRow {
+  display: flex;
+  gap: 8px;
+}
+
+.actionRow > :first-child,
+.actionRow > :nth-child(2) {
+  flex: 1;
+}
+
+.ghostLink {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-accent-700);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 0;
+  text-decoration: none;
+}
+
+.weekActionRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.weekActionRow > * {
+  flex: 1;
+}
+
+.activity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 8px;
+}
+
+.activityText {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+}
+
+/* — sheets — */
+.sheetKicker {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  font-weight: 700;
+}
+
+.sheetMealName {
+  font-size: 26px;
+}
+
+.sheetAlts {
+  display: flex;
+  gap: 8px;
+}
+
+.sheetAlts > * {
+  flex: 1;
+}
+
+.pickList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pickRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-bg);
+  border-radius: 999px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text);
+  width: 100%;
+  text-align: left;
+}
+
+.pickRow:hover {
+  background: var(--color-accent-100);
+}
+
+.pickMeta {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}

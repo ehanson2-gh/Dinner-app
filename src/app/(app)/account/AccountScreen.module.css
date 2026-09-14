@@ -1,0 +1,92 @@
+.h1 {
+  font-size: 27px;
+  margin-bottom: 14px;
+}
+
+.profileCard {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+}
+
+.profileName {
+  font-size: 18px;
+}
+
+.editBtn {
+  margin-left: auto;
+  min-height: 36px;
+  font-size: 12px;
+}
+
+.kicker {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  margin: 20px 0 8px;
+}
+
+.group {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  font-size: 14px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--color-text);
+  text-align: left;
+  font-family: var(--font-body);
+}
+
+.rowInteractive {
+  cursor: pointer;
+}
+
+.divider {
+  height: 1px;
+  background: var(--color-divider);
+}
+
+.rowValue {
+  margin-left: auto;
+}
+
+.swatch {
+  margin-left: auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+}
+
+.toggle {
+  margin-left: auto;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.toggleKnob {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--color-bg);
+}
+
+.signOut {
+  margin: 18px 0 20px;
+}
