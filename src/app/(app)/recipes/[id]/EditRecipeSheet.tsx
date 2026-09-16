@@ -88,7 +88,7 @@ export function EditRecipeSheet({
   return (
     <Sheet open={open} onClose={onClose}>
       <span className={styles.kicker}>Edit recipe</span>
-      <input className="input" style={{ minHeight: 46, fontSize: 15 }} value={name} onChange={(e) => setName(e.target.value)} />
+      <input className="input" style={{ minHeight: 46 }} value={name} onChange={(e) => setName(e.target.value)} />
 
       <span className={styles.kicker}>Protein</span>
       <div className={styles.pillRow}>

@@ -87,7 +87,7 @@ export function NewRecipeSheet({
       <span className={styles.kicker}>New recipe</span>
       <input
         className="input"
-        style={{ minHeight: 46, fontSize: 15 }}
+        style={{ minHeight: 46 }}
         placeholder="Recipe name"
         value={name}
         onChange={(e) => setName(e.target.value)}

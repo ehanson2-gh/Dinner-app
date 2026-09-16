@@ -68,12 +68,17 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body {
-  height: 100%;
+  height: 100dvh;
+  /* Every screen scrolls inside its own flex:1 container (the app body, the
+     sign-in wrap), so the document itself must never scroll or rubber-band —
+     when it does on iOS, the frame's bottom edge and the tab bar with it slide
+     out of view behind the browser UI. */
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body {
   margin: 0;
-  min-height: 100%;
   background: var(--color-neutral-300);
   color: var(--color-text);
   font-family: var(--font-body);
@@ -154,7 +159,11 @@ img { display: block; max-width: 100%; }
 .input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
 textarea.input {
   min-height: 62px; resize: vertical; border-radius: var(--radius-lg);
-  padding: 14px 16px; font-size: 14px;
+  padding: 14px 16px;
+  /* Must stay >= 16px: iOS Safari/Chrome zoom the whole page when a focused
+     form control computes smaller, which then lets the page pan sideways and
+     pushes the tab bar down under the browser chrome. */
+  font-size: 16px;
 }
 
 /* — tags / pills — */
