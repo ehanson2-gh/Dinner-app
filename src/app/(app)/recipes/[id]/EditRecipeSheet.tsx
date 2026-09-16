@@ -143,13 +143,19 @@ export function EditRecipeSheet({
         </button>
       </div>
 
-      <button type="button" className="btn btn-primary btn-block pressable" disabled={isPending} onClick={save}>
+      <button
+        type="button"
+        className="btn btn-primary btn-block pressable"
+        style={{ minHeight: 48 }}
+        disabled={isPending}
+        onClick={save}
+      >
         Save changes
       </button>
       <button
         type="button"
         className="btn btn-ghost pressable"
-        style={{ color: "var(--color-accent-700)", justifyContent: "center" }}
+        style={{ minHeight: 44, color: "var(--color-accent-700)", justifyContent: "center" }}
         disabled={isPending}
         onClick={handleDelete}
       >

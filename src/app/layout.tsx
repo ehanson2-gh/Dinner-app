@@ -30,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${caprasimo.variable} ${figtree.variable}`}>
       <body>
-        <div className={styles.frame}>{children}</div>
+        <div id="app-frame" className={styles.frame}>{children}</div>
       </body>
     </html>
   );

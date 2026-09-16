@@ -5,18 +5,29 @@
   display: flex;
   align-items: flex-end;
   z-index: 40;
+  /* Set by Sheet.tsx from visualViewport — the slice of the frame's bottom
+     edge currently covered by the on-screen keyboard. Reserved as padding so
+     the panel is laid out above it instead of under it. */
+  padding-bottom: var(--sheet-bottom-inset, 0px);
+  transition: padding-bottom 160ms ease;
 }
 
 .panel {
   width: 100%;
   background: var(--color-surface);
   border-radius: 28px 28px 0 0;
+  /* Percentages resolve against the scrim's content box, which the keyboard
+     inset has already shortened — add it back so the panel doesn't lose the
+     height twice, and clamp to whatever room is actually left. */
+  max-height: min(100%, calc(76% + var(--sheet-bottom-inset, 0px)));
   padding: 16px 20px 26px;
+  padding-bottom: max(26px, env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 76%;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   animation: slideUp 220ms ease;
 }
 
