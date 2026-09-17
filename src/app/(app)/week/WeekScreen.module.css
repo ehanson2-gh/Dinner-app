@@ -110,6 +110,7 @@
 }
 
 .ghostLink {
+  flex: none;
   align-self: flex-start;
   background: none;
   border: none;
@@ -145,6 +146,7 @@
 
 /* — sheets — */
 .sheetKicker {
+  flex: none;
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -156,7 +158,9 @@
   font-size: 26px;
 }
 
+/* Stays put at the bottom of the panel while .pickList scrolls above it. */
 .sheetAlts {
+  flex: none;
   display: flex;
   gap: 8px;
 }
@@ -165,13 +169,23 @@
   flex: 1;
 }
 
+/* The recipe list is the only part of the picker that scrolls: it takes the
+   leftover height (min-height:0 so it may shrink below its content) and keeps
+   the search box above it and the Leftovers / Dining out row below it pinned
+   in place, however many recipes there are. */
 .pickList {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
 .pickRow {
+  flex: none;
   display: flex;
   align-items: center;
   justify-content: space-between;

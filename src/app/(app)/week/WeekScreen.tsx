@@ -226,7 +226,7 @@ export function WeekScreen({
         </span>
         <input
           className="input"
-          style={{ minHeight: 44 }}
+          style={{ minHeight: 44, flex: "none" }}
           placeholder="Search recipes"
           value={pq}
           onChange={(e) => setPq(e.target.value)}
