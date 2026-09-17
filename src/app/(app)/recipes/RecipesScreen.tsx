@@ -9,9 +9,11 @@ import styles from "./RecipesScreen.module.css";
 export function RecipesScreen({
   recipes,
   existingCuisines,
+  existingProteins,
 }: {
   recipes: Recipe[];
   existingCuisines: string[];
+  existingProteins: string[];
 }) {
   const [rq, setRq] = useState("");
   const [filter, setFilter] = useState<string>("All");
@@ -118,6 +120,7 @@ export function RecipesScreen({
         open={newRecipeOpen}
         onClose={() => setNewRecipeOpen(false)}
         existingCuisines={existingCuisines}
+        existingProteins={existingProteins}
       />
     </div>
   );

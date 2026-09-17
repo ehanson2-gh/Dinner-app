@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import styles from "./Sheet.module.css";
 
 const noopSubscribe = () => () => {};
+
+// How far the handle must be dragged down before releasing dismisses the sheet.
+const DISMISS_PX = 80;
 
 // How much of the frame's bottom edge is currently hidden behind the on-screen
 // keyboard (or any other browser UI that overlays the layout viewport).
@@ -19,8 +22,8 @@ function bottomInset() {
   return Math.max(0, window.innerHeight - (vv.height + vv.offsetTop));
 }
 
-// Shared shell for all five bottom sheets (Confirm, Recipe picker, New
-// recipe, Edit recipe, Add tag) — see README "Bottom sheets" section.
+// Shared shell for all bottom sheets (Recipe picker, New recipe, Edit recipe,
+// Add tag) — see README "Bottom sheets" section.
 //
 // Portaled into #app-frame (rather than rendered inline) so the sheet isn't
 // nested inside the page's scrollable body — otherwise its scrim/panel get
@@ -40,6 +43,9 @@ export function Sheet({
     () => true,
     () => false
   );
+
+  const panelRef = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ id: number; startY: number } | null>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -71,12 +77,52 @@ export function Sheet({
     };
   }, [open]);
 
+  // The grab handle drags the panel down to dismiss. A plain tap on it also
+  // dismisses, via the click event the browser fires afterwards either way.
+  function onHandleDown(e: React.PointerEvent<HTMLButtonElement>) {
+    drag.current = { id: e.pointerId, startY: e.clientY };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }
+
+  function onHandleMove(e: React.PointerEvent<HTMLButtonElement>) {
+    if (drag.current?.id !== e.pointerId) return;
+    const panel = panelRef.current;
+    if (!panel) return;
+    // Down only — dragging up shouldn't stretch the panel off its anchor.
+    panel.style.transition = "none";
+    panel.style.transform = `translateY(${Math.max(0, e.clientY - drag.current.startY)}px)`;
+  }
+
+  function onHandleUp(e: React.PointerEvent<HTMLButtonElement>) {
+    if (drag.current?.id !== e.pointerId) return;
+    const dy = e.clientY - drag.current.startY;
+    drag.current = null;
+
+    const panel = panelRef.current;
+    if (panel) {
+      panel.style.transition = "";
+      panel.style.transform = "";
+    }
+    if (dy > DISMISS_PX) onClose();
+  }
+
   if (!open || !mounted) return null;
 
   return createPortal(
     <div className={styles.scrim} onClick={onClose}>
-      <div className={styles.panel} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.handle} />
+      <div ref={panelRef} className={styles.panel} onClick={(e) => e.stopPropagation()}>
+        <button
+          type="button"
+          className={styles.handle}
+          aria-label="Dismiss"
+          onClick={onClose}
+          onPointerDown={onHandleDown}
+          onPointerMove={onHandleMove}
+          onPointerUp={onHandleUp}
+          onPointerCancel={onHandleUp}
+        >
+          <span className={styles.handleBar} />
+        </button>
         {children}
       </div>
     </div>,

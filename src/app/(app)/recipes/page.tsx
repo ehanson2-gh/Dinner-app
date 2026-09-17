@@ -10,5 +10,15 @@ export default async function RecipesPage() {
     new Set(recipes.map((r) => r.cuisine).filter((c): c is string => Boolean(c)))
   );
 
-  return <RecipesScreen recipes={recipes} existingCuisines={existingCuisines} />;
+  const existingProteins = Array.from(
+    new Set(recipes.map((r) => r.protein).filter((p): p is string => Boolean(p)))
+  );
+
+  return (
+    <RecipesScreen
+      recipes={recipes}
+      existingCuisines={existingCuisines}
+      existingProteins={existingProteins}
+    />
+  );
 }

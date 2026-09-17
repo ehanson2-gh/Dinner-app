@@ -4,7 +4,8 @@ import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Sheet } from "@/components/Sheet";
 import { useToast } from "@/components/ToastProvider";
-import { PROTEIN_OPTIONS, type Recipe } from "@/lib/types";
+import { ProteinPicker } from "@/components/ProteinPicker";
+import { type Recipe } from "@/lib/types";
 import { updateRecipeAction, removeTagAction, deleteRecipeAction } from "../actions";
 import styles from "@/components/RecipeSheets.module.css";
 
@@ -91,18 +92,7 @@ export function EditRecipeSheet({
       <input className="input" style={{ minHeight: 46 }} value={name} onChange={(e) => setName(e.target.value)} />
 
       <span className={styles.kicker}>Protein</span>
-      <div className={styles.pillRow}>
-        {PROTEIN_OPTIONS.map((p) => (
-          <button
-            key={p}
-            type="button"
-            className={`${styles.pill} pressable ${protein === p ? styles.pillOn : ""}`}
-            onClick={() => setProtein(p)}
-          >
-            {p}
-          </button>
-        ))}
-      </div>
+      <ProteinPicker value={protein} onChange={setProtein} />
 
       <span className={styles.kicker}>Tags — tap to remove</span>
       <div className={styles.chipRow}>

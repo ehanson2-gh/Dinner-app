@@ -4,7 +4,7 @@ import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Sheet } from "@/components/Sheet";
 import { useToast } from "@/components/ToastProvider";
-import { PROTEIN_OPTIONS } from "@/lib/types";
+import { ProteinPicker } from "@/components/ProteinPicker";
 import { createRecipeAction } from "@/app/(app)/recipes/actions";
 import styles from "./RecipeSheets.module.css";
 
@@ -15,11 +15,13 @@ export function NewRecipeSheet({
   onClose,
   initialName = "",
   existingCuisines,
+  existingProteins = [],
 }: {
   open: boolean;
   onClose: () => void;
   initialName?: string;
   existingCuisines: string[];
+  existingProteins?: string[];
 }) {
   const router = useRouter();
   const { flash } = useToast();
@@ -91,22 +93,10 @@ export function NewRecipeSheet({
         placeholder="Recipe name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        autoFocus
       />
 
       <span className={styles.kicker}>Protein</span>
-      <div className={styles.pillRow}>
-        {PROTEIN_OPTIONS.map((p) => (
-          <button
-            key={p}
-            type="button"
-            className={`${styles.pill} pressable ${protein === p ? styles.pillOn : ""}`}
-            onClick={() => setProtein(p)}
-          >
-            {p}
-          </button>
-        ))}
-      </div>
+      <ProteinPicker value={protein} onChange={setProtein} extras={existingProteins} />
 
       <span className={styles.kicker}>Tags</span>
       <div className={styles.tagInputRow}>

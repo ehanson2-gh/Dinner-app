@@ -32,12 +32,27 @@
 }
 
 .handle {
+  /* A button, not decoration: tapping dismisses, dragging down dismisses.
+     The padding is hit area — the visible line is .handleBar inside it. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 6px 0 10px;
+  margin: -6px 0 -2px;
+  border: none;
+  background: none;
+  cursor: grab;
+  flex: none;
+  /* Keep the browser from scrolling the panel while the handle is dragged. */
+  touch-action: none;
+}
+
+.handleBar {
   width: 38px;
   height: 4px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--color-text) 20%, transparent);
-  margin: 0 auto 4px;
-  flex: none;
 }
 
 @keyframes slideUp {

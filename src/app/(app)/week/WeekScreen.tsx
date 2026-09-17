@@ -53,7 +53,9 @@ export function WeekScreen({
   const { flash } = useToast();
   const [isPending, startTransition] = useTransition();
   const [selDate, setSelDate] = useState(dates.includes(todayISO) ? todayISO : dates[0]);
-  const [sheet, setSheet] = useState<null | "confirm" | "picker">(null);
+  // The picker sheet serves two intents: "plan" (Pick recipe — set the day)
+  // and "log" (Log what we actually ate — set the day and log it in one go).
+  const [picker, setPicker] = useState<null | "plan" | "log">(null);
   const [pq, setPq] = useState("");
 
   const selIndex = dates.indexOf(selDate);
@@ -68,6 +70,11 @@ export function WeekScreen({
     } catch {
       // localStorage/cookies can be unavailable (private mode); non-critical.
     }
+  }
+
+  function openPicker(intent: "plan" | "log") {
+    setPq("");
+    setPicker(intent);
   }
 
   function run(action: () => Promise<void>, after?: () => void) {
@@ -134,10 +141,28 @@ export function WeekScreen({
         )}
         <p className={styles.note}>{loggedNotes[selDate] || "No notes yet"}</p>
 
+        <button
+          type="button"
+          className="btn btn-primary btn-block btn-lg pressable"
+          disabled={isPending}
+          onClick={() =>
+            run(
+              () => confirmAte(weekStartDate, selIndex),
+              () => flash(`${selDay.name} logged`)
+            )
+          }
+        >
+          {isLogged ? "✓ Logged — confirm again" : "✓ We ate this"}
+        </button>
+
+        <button type="button" className={styles.ghostLink} onClick={() => openPicker("log")}>
+          {isLogged ? "Logged something else? →" : "Log what we actually ate →"}
+        </button>
+
         <div className={styles.actionRow}>
           <button
             type="button"
-            className="btn btn-primary pressable"
+            className="btn btn-secondary pressable"
             style={{ minHeight: 44 }}
             disabled={isPending}
             onClick={() => run(() => swapDay(weekStartDate, selIndex))}
@@ -149,10 +174,7 @@ export function WeekScreen({
             className="btn btn-secondary pressable"
             style={{ minHeight: 44 }}
             disabled={isPending}
-            onClick={() => {
-              setPq("");
-              setSheet("picker");
-            }}
+            onClick={() => openPicker("plan")}
           >
             Pick recipe
           </button>
@@ -166,10 +188,6 @@ export function WeekScreen({
             ✕
           </button>
         </div>
-
-        <button type="button" className={styles.ghostLink} onClick={() => setSheet("confirm")}>
-          {isLogged ? "✓ Logged — edit entry" : "Log what we actually ate →"}
-        </button>
       </div>
 
       <div className={styles.weekActionRow}>
@@ -200,87 +218,18 @@ export function WeekScreen({
         </span>
       </div>
 
-      <Sheet open={sheet === "confirm"} onClose={() => setSheet(null)}>
-        <span className={styles.sheetKicker}>{formatWeekdayDayMonth(selDate)}</span>
-        <h2 className={styles.sheetMealName}>{selDay.name}</h2>
-        <button
-          type="button"
-          className="btn btn-primary btn-block btn-lg pressable"
-          disabled={isPending}
-          onClick={() =>
-            run(
-              () => confirmAte(weekStartDate, selIndex),
-              () => {
-                setSheet(null);
-                flash(`${selDay.name} logged`);
-              }
-            )
-          }
-        >
-          We ate this
-        </button>
-        <div className={styles.sheetAlts}>
-          <Link
-            href={`/log?date=${selDate}`}
-            className="btn btn-secondary pressable"
-            style={{ minHeight: 42 }}
-            onClick={() => setSheet(null)}
-          >
-            Something else
-          </Link>
-          <button
-            type="button"
-            className="btn btn-secondary pressable"
-            style={{ minHeight: 42 }}
-            disabled={isPending}
-            onClick={() =>
-              run(
-                () => quickAlt(weekStartDate, selIndex, "Leftovers"),
-                () => {
-                  setSheet(null);
-                  flash("Leftovers logged");
-                }
-              )
-            }
-          >
-            Leftovers
-          </button>
-          <button
-            type="button"
-            className="btn btn-secondary pressable"
-            style={{ minHeight: 42 }}
-            disabled={isPending}
-            onClick={() =>
-              run(
-                () => quickAlt(weekStartDate, selIndex, "Dining out"),
-                () => {
-                  setSheet(null);
-                  flash("Dining out logged");
-                }
-              )
-            }
-          >
-            Dining out
-          </button>
-        </div>
-        <Link
-          href={`/log?date=${selDate}&prefill=${encodeURIComponent(selDay.name)}&more=1`}
-          className={styles.ghostLink}
-          onClick={() => setSheet(null)}
-        >
-          ＋ Notes, tags, photo, link
-        </Link>
-      </Sheet>
-
-      <Sheet open={sheet === "picker"} onClose={() => setSheet(null)}>
-        <span className={styles.sheetKicker}>Pick a recipe for {formatWeekdayDayMonth(selDate)}</span>
+      <Sheet open={picker !== null} onClose={() => setPicker(null)}>
+        <span className={styles.sheetKicker}>
+          {picker === "log"
+            ? `What did we actually eat on ${formatWeekdayDayMonth(selDate)}?`
+            : `Pick a recipe for ${formatWeekdayDayMonth(selDate)}`}
+        </span>
         <input
           className="input"
           style={{ minHeight: 44 }}
           placeholder="Search recipes"
           value={pq}
           onChange={(e) => setPq(e.target.value)}
-          autoFocus
         />
         <div className={styles.pickList}>
           {filteredPicks.map((r) => (
@@ -291,8 +240,15 @@ export function WeekScreen({
               disabled={isPending}
               onClick={() =>
                 run(
-                  () => pickRecipeForDayAction(weekStartDate, selIndex, r.id),
-                  () => setSheet(null)
+                  async () => {
+                    await pickRecipeForDayAction(weekStartDate, selIndex, r.id);
+                    // "Log" means the day is both re-planned and recorded as eaten.
+                    if (picker === "log") await confirmAte(weekStartDate, selIndex);
+                  },
+                  () => {
+                    if (picker === "log") flash(`${r.name} logged`);
+                    setPicker(null);
+                  }
                 )
               }
             >
@@ -301,7 +257,56 @@ export function WeekScreen({
             </button>
           ))}
         </div>
+
+        {picker === "log" && (
+          <>
+            <div className={styles.sheetAlts}>
+              <button
+                type="button"
+                className="btn btn-secondary pressable"
+                style={{ minHeight: 42 }}
+                disabled={isPending}
+                onClick={() =>
+                  run(
+                    () => quickAlt(weekStartDate, selIndex, "Leftovers"),
+                    () => {
+                      setPicker(null);
+                      flash("Leftovers logged");
+                    }
+                  )
+                }
+              >
+                Leftovers
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary pressable"
+                style={{ minHeight: 42 }}
+                disabled={isPending}
+                onClick={() =>
+                  run(
+                    () => quickAlt(weekStartDate, selIndex, "Dining out"),
+                    () => {
+                      setPicker(null);
+                      flash("Dining out logged");
+                    }
+                  )
+                }
+              >
+                Dining out
+              </button>
+            </div>
+            <Link
+              href={`/log?date=${selDate}`}
+              className={styles.ghostLink}
+              onClick={() => setPicker(null)}
+            >
+              ＋ Something else — notes, tags, photo, link
+            </Link>
+          </>
+        )}
       </Sheet>
+
     </div>
   );
 }

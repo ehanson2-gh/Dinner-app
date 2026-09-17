@@ -132,7 +132,6 @@ export function RecipeDetailScreen({
               placeholder="URL"
               value={linkUrl}
               onChange={(e) => setLinkUrl(e.target.value)}
-              autoFocus
             />
             <input
               className="input"
